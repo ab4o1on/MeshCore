@@ -44,11 +44,14 @@ bool ST7789LCDDisplay::begin() {
     }
 
     // Im not sure if this is just a t-deck problem or not, if your display is slow try this.
-    #if defined(LILYGO_TDECK) || defined(HELTEC_LORA_V4_TFT) || defined(HELTEC_V4_R8_TFT)
+    #if defined(LILYGO_TDECK) || defined(HELTEC_LORA_V4_TFT) || defined(HELTEC_V4_R8_TFT) || defined(LILKA_BOARD)
       displaySPI.begin(PIN_TFT_SCL, PIN_TFT_MISO, PIN_TFT_SDA, PIN_TFT_CS);
     #endif
 
     display.init(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+    #ifdef LILKA_BOARD
+      display.setPanelOffset(TFT_OFFSET_X, TFT_OFFSET_Y);
+    #endif
     display.setRotation(DISPLAY_ROTATION);
 
     display.setSPISpeed(40e6);
