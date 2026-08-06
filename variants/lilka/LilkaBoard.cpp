@@ -7,11 +7,13 @@ extern "C" bool verifyRollbackLater() {
 
 void LilkaBoard::begin() {
   ESP32Board::begin();
-  btn_prev_state = HIGH;
-  pinMode(PIN_USER_BTN, INPUT_PULLUP);
-  pinMode(JOYSTICK_LEFT, INPUT_PULLUP);
-  pinMode(JOYSTICK_RIGHT, INPUT_PULLUP);
-  pinMode(PIN_BACK_BTN, INPUT_PULLUP);
+  #ifdef DISPLAY_CLASS
+    btn_prev_state = HIGH;
+    pinMode(PIN_USER_BTN, INPUT_PULLUP);
+    pinMode(JOYSTICK_LEFT, INPUT_PULLUP);
+    pinMode(JOYSTICK_RIGHT, INPUT_PULLUP);
+    pinMode(PIN_BACK_BTN, INPUT_PULLUP);
+  #endif
 }
 
 uint16_t LilkaBoard::getBattMilliVolts() {
